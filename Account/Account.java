@@ -11,12 +11,12 @@ public class Account {
 	/*Constructor 建構子: 名稱需與class名(line 2)一樣
 	 * Account(這裡的參數看有甚麼條件)
 	 */
-	Account(String name,String id,int balance){	
-		this.name = name;	//line 3 name = line 8 name 即method的引數指派給line 3 的變數
+	Account(String name,String id,int balance){
+		this.name = name;	//line 9 name = line 14 name 即method的引數指派給line 9 的變數
 		this.id = id;
 		this.balance = balance;
 	}
-	
+
 	public Account(String name,String id) {
 		this.name = name;
 		this.id = id;
