@@ -42,7 +42,7 @@ public class Account {
 	public void transfer(Account a,int money){
 		//防呆
 		if(money < 0) System.out.println("Error number of money");
-		else if(money > a.balance) System.out.println("Not enougth money");
+		else if(money > a.balance) System.out.println("Not enough money");
 		else{
 			//a - money
 			a.balance -= money;
