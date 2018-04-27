@@ -1,6 +1,6 @@
 
 public class Product {
-	private int volume,price,totalAmount=0;
+	private int volume,price,totalAmount;
 	private String productName;
 	public Product(String name,int price) {
 		productName = name;
@@ -22,7 +22,7 @@ public class Product {
 		if(this.volume<volume) System.out.println("UNDERSTOCK!");
 		else{
 			this.volume-=volume;
-			totalAmount += this.price * volume;
+			totalAmount = this.price * volume;
 		}
 		return totalAmount;
 	}
