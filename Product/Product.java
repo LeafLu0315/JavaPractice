@@ -1,6 +1,6 @@
 
 public class Product {
-	private int volume,price,totalAmount;
+	private int volume,price,totalAmount=0;
 	private String productName;
 	public Product(String name,int price) {
 		productName = name;
