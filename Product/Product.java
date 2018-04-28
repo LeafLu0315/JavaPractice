@@ -19,9 +19,9 @@ public class Product {
 	}
 	
 	public int Sell(int volume){
-		if(this.volume<volume) System.out.println("UNDERSTOCK!");
+		if(this.volume < volume) System.out.println("UNDERSTOCK!");
 		else{
-			this.volume-=volume;
+			this.volume -= volume;
 			totalAmount = this.price * volume;
 		}
 		return totalAmount;
@@ -32,9 +32,9 @@ public class Product {
 	}
 	
 	public String toString(){
-		if(volume<=0) return "Product : "+ productName + " UNDERSTOCK!";
-		else return "Product : "+productName+
-				"\nPrice : "+price+
-				"\nVolume : "+volume;
+		if(volume <= 0) return "Product : "+ productName + " UNDERSTOCK!";
+		else return "Product : "+ productName +
+				"\nPrice : "+ price +
+				"\nVolume : " + volume ;
 	}
 }
