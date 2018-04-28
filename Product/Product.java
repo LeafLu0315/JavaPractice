@@ -1,6 +1,6 @@
 
 public class Product {
-	private int volume,price,totalAmount=0;
+	private int volume,price,totalAmount;
 	private String productName;
 	public Product(String name,int price) {
 		productName = name;
@@ -19,9 +19,9 @@ public class Product {
 	}
 	
 	public int Sell(int volume){
-		if(this.volume < volume) System.out.println("UNDERSTOCK!");
+		if(this.volume<volume) System.out.println("UNDERSTOCK!");
 		else{
-			this.volume -= volume;
+			this.volume-=volume;
 			totalAmount = this.price * volume;
 		}
 		return totalAmount;
@@ -33,8 +33,8 @@ public class Product {
 	
 	public String toString(){
 		if(volume <= 0) return "Product : "+ productName + " UNDERSTOCK!";
-		else return "Product : "+ productName +
-				"\nPrice : "+ price +
-				"\nVolume : " + volume ;
+		else return "Product : "+productName+
+				"\nPrice : "+price+
+				"\nVolume : "+volume;
 	}
 }
