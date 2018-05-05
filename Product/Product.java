@@ -1,6 +1,6 @@
 
 public class Product {
-	private int volume,price,totalAmount;
+	private int volume,price,totalAmount = 0;
 	private String productName;
 	public Product(String name,int price) {
 		productName = name;
@@ -32,7 +32,7 @@ public class Product {
 	}
 	
 	public String toString(){
-		if(volume<=0) return "Product : "+ productName + " UNDERSTOCK!";
+		if(volume <= 0) return "Product : "+ productName + " UNDERSTOCK!";
 		else return "Product : "+productName+
 				"\nPrice : "+price+
 				"\nVolume : "+volume;
