@@ -1,19 +1,14 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
-
-public class Student implements StudentInfo {
-	private static int scoreSize = 4;
+public class Student extends GlobalVar implements StudentInfo {
 	private String ID,gpa;
-	private double scores[] = new double[scoreSize];
-	private static double allavg[] = new double[scoreSize];
-	
-	private double totalsc = 0,avgsc = 0;
+	private double Scores[] = new double[scoreSize];
+	private double StuTtlScore = 0,StuAvgScore = 0;
 	/* Constructor */
-	public Student(String ID,double scores[]) {
+	public Student(String ID,double Scores[]) {
 		this.ID = ID;
-		this.scores = scores;
+		for(int i=0;i<scoreSize;i++) this.Scores[i] = Scores[i];
 	}
 	/* Methods */
 	public String getId() {
@@ -21,134 +16,113 @@ public class Student implements StudentInfo {
 	}
 	
 	public double[] getStuScore() {
-		return this.scores;
+		return this.Scores;
 	}
 	
 	public void setStuTtlScore() {
-		for(int i=0;i<scoreSize;i++) {
-			if(i == 0) this.totalsc += scores[i] * 0.4;
-			else this.totalsc += scores[i] * 0.2;
-		}
+		StuTtlScore += this.Scores[0] * 0.4;
+		for(int i = 1;i<scoreSize;i++) StuTtlScore += this.Scores[i] * 0.2;
 	}
 	
 	public double getStuTtlScore() {
-		return this.totalsc;
+		return StuTtlScore;
 	}
 	
 	public void setStuAvgScore() {
-		double sum=0;
-		for(int i=0;i<scoreSize;i++) sum+=scores[i];
-		this.avgsc = sum/scoreSize;
+		int nonZero = scoreSize;
+		for(int i=0;i<scoreSize;i++) {
+			if(this.Scores[i] == 0) nonZero--;
+			StuAvgScore += this.Scores[i];
+		}
+		if(nonZero > 0) StuAvgScore /= nonZero;
+		else StuAvgScore = 0;
 	}
 	
 	public double getStuAvgScore() {
-		return this.avgsc;
+		return StuAvgScore;
 	}
 	
 	public void setStuGpa() {
-		if(this.totalsc >= 98 ) gpa = "A+";
-		else if(this.totalsc < 98 && this.totalsc >= 92) gpa = "A";
-		else if(this.totalsc < 92 && this.totalsc >= 90) gpa = "A-";
-		else if(this.totalsc < 90 && this.totalsc >= 88) gpa = "B+";
-		else if(this.totalsc < 88 && this.totalsc >= 82) gpa = "B";
-		else if(this.totalsc < 82 && this.totalsc >= 80) gpa = "B-";
-		else if(this.totalsc < 80 && this.totalsc >= 78) gpa = "C+";
-		else if(this.totalsc < 78 && this.totalsc >= 72) gpa = "C";
-		else if(this.totalsc < 72 && this.totalsc >= 70) gpa = "C-";
-		else if(this.totalsc < 70 && this.totalsc >= 60) gpa = "D";
-		else gpa = "F";
+		if(StuTtlScore >= 98) gpa = GPA[0];
+		else if(StuTtlScore >= 92 && StuTtlScore < 98) gpa = GPA[1];
+		else if(StuTtlScore >= 90 && StuTtlScore < 92) gpa = GPA[2];
+		else if(StuTtlScore >= 88 && StuTtlScore < 90) gpa = GPA[3];
+		else if(StuTtlScore >= 82 && StuTtlScore < 88) gpa = GPA[4];
+		else if(StuTtlScore >= 80 && StuTtlScore < 82) gpa = GPA[5];
+		else if(StuTtlScore >= 78 && StuTtlScore < 80) gpa = GPA[6];
+		else if(StuTtlScore >= 72 && StuTtlScore < 78) gpa = GPA[7];
+		else if(StuTtlScore >= 70 && StuTtlScore < 72) gpa = GPA[8];
+		else if(StuTtlScore >= 60 && StuTtlScore < 70) gpa = GPA[9];
+		else if(StuTtlScore < 60) gpa = GPA[10];
 	}
 	
 	public String getStuGpa() {
-		return this.gpa;
+		return gpa;
 	}
 	
-	public static double[] allStuAvgScore(ArrayList<Student> students) {
-		double avg;
+	public static double[] allStuAvgScore(ArrayList<Student> stu) {
 		for(int i=0;i<scoreSize;i++) {
-			avg = 0;
-			for(int j=0;j<students.size();j++) 	avg += students.get(j).scores[i];
-			allavg[i] = avg/students.size();
+			for(int j=0;j<stu.size();j++)
+				allavg[i] += stu.get(j).getStuScore()[i];
+			allavg[i] /= stu.size();
 		}
 		return allavg;
 	}
 	
-	public static double[] allStuStd(ArrayList<Student> students) {
-		double sd[] = new double[scoreSize];
-		double sumup = 0,x;
+	public static double[] allStuStd(ArrayList<Student> stu) {
 		for(int i=0;i<scoreSize;i++) {
-			for(int j=0;j<students.size();j++) {
-				x = students.get(j).scores[i] - allavg[i];
-				sumup += x * x;
-			}
-			sd[i] = sumup/students.size();
+			for(int j=0;j<stu.size();j++)
+				std[i] += Math.pow(stu.get(j).getStuScore()[i]-allavg[i], 2);
+			std[i] = Math.sqrt(std[i]/stu.size());
 		}
-		return sd;
+		return std;
 	}
 	
-	public static void gradeDistribution(ArrayList<Student> students) {
-		int distribution[] = new int[11];
-		String[] gpas = {"A+","A","A-","B+","B","B-","C+","C","C-","D","F"};
-		for(int i=0;i<11;i++) distribution[i] = 0;
-		for(int i=0;i<students.size();i++) {
-			switch (students.get(i).gpa) {
-			case "A+":
-				distribution[0]++;
-				break;
-			case "A":
-				distribution[1]++;
-				break;
-			case "A-":
-				distribution[2]++;
-				break;
-			case "B+":
-				distribution[3]++;
-				break;
-			case "B":
-				distribution[4]++;
-				break;
-			case "B-":
-				distribution[5]++;
-				break;
-			case "C+":
-				distribution[6]++;
-				break;
-			case "C":
-				distribution[7]++;
-				break;
-			case "C-":
-				distribution[8]++;
-				break;
-			case "D":
-				distribution[9]++;
-				break;
-			case "F":
-				distribution[10]++;
-				break;
-			default:
-				break;
-			}
+	public static void gradeDistribution(ArrayList<Student> stu) {
+		for(int i=0;i<stu.size();i++)
+			for(int j=0;j<Gpasize;j++) 
+				if(stu.get(i).getStuGpa().equals(GPA[j])) {
+					distribution[j]++;
+					break;
+				}
+		for(int i=0;i<Gpasize;i++) System.out.println(GPA[i] + "\t" + distribution[i]);
+	}
+	
+	public static ArrayList<Student> scoreSorting(ArrayList<Student> stu,String s) {
+		ArrayList<Student> sortingList = new ArrayList<Student>(stu);
+		int pos = findTitlePos(s);
+		printTitle();
+		printAllScores(stu);
+		System.out.println("Sort by : "+ s);
+		sorting(sortingList,pos);
+		printTitle();
+		printAllScores(sortingList);
+		return sortingList;
+	}
+	
+	private static void printTitle() {
+		for(int i=0;i<scoreSize;i++) System.out.print(title[i]+"\t");
+		System.out.print("\n");
+	}
+	
+	private static void printAllScores(ArrayList<Student> stu) {
+		for(int i=0;i<scoreSize;i++) {
+			for(int j=0;j<stu.size();j++)
+				System.out.print(stu.get(j).getStuScore()[i]+"\t");
+			System.out.print("\n");
 		}
-		for(int i=0;i<11;i++) System.out.println(gpas[i] +"\t"+distribution[i]);
 	}
 	
-	public static ArrayList<Student> scoreSorting(ArrayList<Student> students, String str) {
-		int pos = 0;
-		String exams[] = {"Midterm","preQuiz","LabQuiz","HW1"};
-		for(int i=0;i<4;i++) System.out.println(exams[i]+"\t");
-		for(int i=0;i<students.size();i++) System.out.println(students.get(i).scores[i]);
-		System.out.println("Sort by "+ str);
-		ArrayList<Student> sorts = new ArrayList<Student>(students);
-		for(int i=0;i<4;i++) 
-			if(str.equals(exams[i])) {
-				pos=i;
-				break;
-			}
-		for(int i=0;i<sorts.size()-1;i++)
-			for(int j=i+1;j<sorts.size();j++) 
-				if(sorts.get(i).getStuScore()[pos]<sorts.get(j).getStuScore()[pos]) 
-					Collections.swap(sorts, i, j);
-		return sorts;
+	private static int findTitlePos(String s) {
+		for(int i=0;i<scoreSize;i++)
+			if(title[i].equals(s)) return i;
+		return 0;
 	}
 	
+	private static void sorting(ArrayList<Student> stu,int pos) {
+		for(int i=0;i<stu.size()-1;i++)
+			for(int j=i+1;j<stu.size();j++)
+				if(stu.get(i).getStuScore()[pos] < stu.get(j).getStuScore()[pos])
+					Collections.swap(stu, i, j);
+	}
 }

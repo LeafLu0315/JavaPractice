@@ -1,12 +1,11 @@
-import java.util.ArrayList;
 
-public interface StudentInfo{
-	String getId();
-	double[] getStuScore();
-	void setStuTtlScore();
-	double getStuTtlScore();
-	void setStuAvgScore();
-	double getStuAvgScore();
-	void setStuGpa();
-	String getStuGpa();
+public interface StudentInfo {
+	public String getId();
+	public double[] getStuScore();
+	public void setStuTtlScore();
+	public double getStuTtlScore();
+	public void setStuAvgScore();
+	public double getStuAvgScore();
+	public void setStuGpa();
+	public String getStuGpa();
 }
