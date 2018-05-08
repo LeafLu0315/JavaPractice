@@ -62,8 +62,7 @@ public class Student extends GlobalVar implements StudentInfo {
 	
 	public static double[] allStuAvgScore(ArrayList<Student> stu) {
 		for(int i=0;i<scoreSize;i++) {
-			for(int j=0;j<stu.size();j++)
-				allavg[i] += stu.get(j).getStuScore()[i];
+			for(int j=0;j<stu.size();j++) allavg[i] += stu.get(j).getStuScore()[i];
 			allavg[i] /= stu.size();
 		}
 		return allavg;
@@ -71,20 +70,18 @@ public class Student extends GlobalVar implements StudentInfo {
 	
 	public static double[] allStuStd(ArrayList<Student> stu) {
 		for(int i=0;i<scoreSize;i++) {
-			for(int j=0;j<stu.size();j++)
-				std[i] += Math.pow(stu.get(j).getStuScore()[i]-allavg[i], 2);
+			for(int j=0;j<stu.size();j++) std[i] += Math.pow(stu.get(j).getStuScore()[i]-allavg[i], 2);
 			std[i] = Math.sqrt(std[i]/stu.size());
 		}
 		return std;
 	}
 	
 	public static void gradeDistribution(ArrayList<Student> stu) {
-		for(int i=0;i<stu.size();i++)
-			for(int j=0;j<Gpasize;j++) 
-				if(stu.get(i).getStuGpa().equals(GPA[j])) {
-					distribution[j]++;
-					break;
-				}
+		for(int i=0;i<stu.size();i++) for(int j=0;j<Gpasize;j++) 
+			if(stu.get(i).getStuGpa().equals(GPA[j])) {
+				distribution[j]++;
+				break;
+			}
 		for(int i=0;i<Gpasize;i++) System.out.println(GPA[i] + "\t" + distribution[i]);
 	}
 	
@@ -107,22 +104,18 @@ public class Student extends GlobalVar implements StudentInfo {
 	
 	private static void printAllScores(ArrayList<Student> stu) {
 		for(int i=0;i<stu.size();i++) {
-			for(int j=0;j<scoreSize;j++)
-				System.out.print(stu.get(i).getStuScore()[j]+"\t");
+			for(int j=0;j<scoreSize;j++) System.out.print(stu.get(i).getStuScore()[j]+"\t");
 			System.out.print("\n");
 		}
 	}
 	
 	private static int findTitlePos(String s) {
-		for(int i=0;i<scoreSize;i++)
-			if(title[i].equals(s)) return i;
+		for(int i=0;i<scoreSize;i++) if(title[i].equals(s)) return i;
 		return 0;
 	}
 	
 	private static void sorting(ArrayList<Student> stu,int pos) {
-		for(int i=0;i<stu.size()-1;i++)
-			for(int j=i+1;j<stu.size();j++)
-				if(stu.get(i).getStuScore()[pos] < stu.get(j).getStuScore()[pos])
-					Collections.swap(stu, i, j);
+		for(int i=0;i<stu.size()-1;i++) for(int j=i+1;j<stu.size();j++)
+			if(stu.get(i).getStuScore()[pos] < stu.get(j).getStuScore()[pos]) Collections.swap(stu, i, j);
 	}
 }
