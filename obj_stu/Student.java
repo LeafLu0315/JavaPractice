@@ -106,9 +106,9 @@ public class Student extends GlobalVar implements StudentInfo {
 	}
 	
 	private static void printAllScores(ArrayList<Student> stu) {
-		for(int i=0;i<scoreSize;i++) {
-			for(int j=0;j<stu.size();j++)
-				System.out.print(stu.get(j).getStuScore()[i]+"\t");
+		for(int i=0;i<stu.size();i++) {
+			for(int j=0;j<scoreSize;j++)
+				System.out.print(stu.get(i).getStuScore()[j]+"\t");
 			System.out.print("\n");
 		}
 	}

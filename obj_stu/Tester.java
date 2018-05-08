@@ -56,7 +56,6 @@ class Tester {
 			double total = stu.getStuTtlScore();
 			double avg = stu.getStuAvgScore();
 			String gpa = stu.getStuGpa();
-
 			System.out.printf("%-15s%-10.0f%-10.0f%-10.0f%-10.0f%-10.2f%-10.2f%-10s\n", stuId,
 				scores[0], scores[1], scores[2], scores[3], total, avg, gpa);
 		}
