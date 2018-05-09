@@ -43,17 +43,17 @@ public class Student extends GlobalVar implements StudentInfo {
 	}
 	
 	public void setStuGpa() {
-		if(StuTtlScore >= 98) gpa = GPA[0];
-		else if(StuTtlScore >= 92 && StuTtlScore < 98) gpa = GPA[1];
-		else if(StuTtlScore >= 90 && StuTtlScore < 92) gpa = GPA[2];
-		else if(StuTtlScore >= 88 && StuTtlScore < 90) gpa = GPA[3];
-		else if(StuTtlScore >= 82 && StuTtlScore < 88) gpa = GPA[4];
-		else if(StuTtlScore >= 80 && StuTtlScore < 82) gpa = GPA[5];
-		else if(StuTtlScore >= 78 && StuTtlScore < 80) gpa = GPA[6];
-		else if(StuTtlScore >= 72 && StuTtlScore < 78) gpa = GPA[7];
-		else if(StuTtlScore >= 70 && StuTtlScore < 72) gpa = GPA[8];
-		else if(StuTtlScore >= 60 && StuTtlScore < 70) gpa = GPA[9];
-		else if(StuTtlScore < 60) gpa = GPA[10];
+		if(StuAvgScore >= 98) gpa = GPA[0];
+		else if(StuAvgScore >= 92 && StuAvgScore < 98) gpa = GPA[1];
+		else if(StuAvgScore >= 90 && StuAvgScore < 92) gpa = GPA[2];
+		else if(StuAvgScore >= 88 && StuAvgScore < 90) gpa = GPA[3];
+		else if(StuAvgScore >= 82 && StuAvgScore < 88) gpa = GPA[4];
+		else if(StuAvgScore >= 80 && StuAvgScore < 82) gpa = GPA[5];
+		else if(StuAvgScore >= 78 && StuAvgScore < 80) gpa = GPA[6];
+		else if(StuAvgScore >= 72 && StuAvgScore < 78) gpa = GPA[7];
+		else if(StuAvgScore >= 70 && StuAvgScore < 72) gpa = GPA[8];
+		else if(StuAvgScore >= 60 && StuAvgScore < 70) gpa = GPA[9];
+		else if(StuAvgScore < 60) gpa = GPA[10];
 	}
 	
 	public String getStuGpa() {
